@@ -2,16 +2,22 @@ package org.rakshitha.springbootwebapp.model;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
+import javax.validation.constraints.Size;
 
 public class Todo {
 
 	private int id;
 	private String user;
+	
+	@Size(min=10, message="Enter at least 10 characters")
 	private String description;
 	private Date targetDate;
 	private boolean isDone;
 
+	public Todo() {
+		super();
+	}
+	
 	public Todo(int id, String user, String description, Date targetDate, boolean isDone) {
 		super();
 		this.id = id;
