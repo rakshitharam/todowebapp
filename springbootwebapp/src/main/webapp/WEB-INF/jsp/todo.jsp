@@ -1,15 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Welcome</title>
-<link href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"
-	rel="stylesheet">
-</head>
-<body>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 	<div class="container">
 		<form:form method="post" modelAttribute="todo">
 		<form:hidden path="id"/>
@@ -28,12 +18,4 @@
 			<button type="submit" class="btn btn-success">Add</button>
 		</form:form>
 	</div>
-	<script src="webjars/jquery/3.5.0/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
-	<script src="webjars/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
-	<script> $('#targetDate').datepicker({
-		format : 'dd/mm/yyyy'
-	});</script>
-	
-</body>
-</html>
+<%@ include file="common/footer.jspf" %>	

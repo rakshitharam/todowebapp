@@ -1,12 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Login</title>
-</head>
-<body>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
+<div class="container">
 	<font color="red">${errorMessage}</font>
 	<form method="post">
 		Name : <input type="text" name="name">
@@ -15,8 +9,6 @@
 		<br>
 		<input type="submit">
 	</form>
+</div>
 
-
-
-</body>
-</html>
+<%@ include file="common/footer.jspf" %>
