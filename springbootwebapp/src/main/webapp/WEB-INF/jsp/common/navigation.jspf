@@ -1,10 +1,14 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-blue navbar-light">
 	
 	<div class="container-fluid">
 	<a class="navbar-brand" href="#">To Do List</a>
 		<ul class="nav navbar-nav">
-			<li><a href="/login"> Home </a></li>
-			<li class="nav-item active"><a href="/list-todos"> Todos </a></li>
+			<li class="nav item"><a class="nav-link" href="/"> Home </a></li>
+			<li class="nav-item active"><a class="nav-link" href="/list-todos"> Todos </a></li>
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="nav-item"><a href="/logout"> Logout </a></li>
 
 		</ul>
 	</div>
