@@ -2,10 +2,12 @@ package org.rakshitha.springbootwebapp.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.rakshitha.springbootwebapp.model.Todo;
+import org.rakshitha.springbootwebapp.service.TodoRepository;
 import org.rakshitha.springbootwebapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -25,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TodoController {
 	
 	@Autowired
-	TodoService todoService;
+	TodoRepository todoRepository;
 	
 	@InitBinder
 	public void InitBinder(WebDataBinder binder) {
@@ -39,7 +41,7 @@ public class TodoController {
 	//@ResponseBody
 	public String showTodos(ModelMap model) {
 		String name = getLoggedInUserName(model);
-		model.put("todos", todoService.retrieveTodos(name));
+		model.put("todos", todoRepository.findByUser(name));
 		return "list-todos";
 	}
 
@@ -63,7 +65,10 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-		todoService.addTodo(getLoggedInUserName(model), todo.getDescription(), todo.getTargetDate(), false);
+		todo.setUser(getLoggedInUserName(model));
+		todoRepository.save(todo);
+		//no need of service
+		//todoService.addTodo(getLoggedInUserName(model), todo.getDescription(), todo.getTargetDate(), false);
 		
 		return "redirect:/list-todos";
 	}
@@ -72,13 +77,14 @@ public class TodoController {
 	//@ResponseBody
 	public String deleteTodo(@RequestParam int id) {
 		
-		todoService.deleteTodo(id);
+		todoRepository.deleteById(id);
+		//todoService.deleteTodo(id);
 		return "redirect:/list-todos";
 	}
 	
 	@RequestMapping(value="/update-todo", method = RequestMethod.GET)
 	public String showUpdateTodo(@RequestParam int id, ModelMap model) {
-		Todo todo = todoService.retrieveTodo(id);
+		Optional<Todo> todo = todoRepository.findById(id);
 		model.put("todo", todo);
 		return "todo";
 	}
@@ -89,7 +95,8 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-		todoService.updateTodo(todo);
+		todoRepository.save(todo);
+		//todoService.updateTodo(todo);
 		return "redirect:/list-todos";
 	}
 }
